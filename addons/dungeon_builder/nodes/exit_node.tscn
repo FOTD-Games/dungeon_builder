@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0vhvn3l1hihe"]
+
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/exit_node.gd" id="1_oawq4"]
+
+[node name="ExitNode" type="Area2D"]
+script = ExtResource("1_oawq4")

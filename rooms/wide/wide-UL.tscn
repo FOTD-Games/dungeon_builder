@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6783pcacrjb5"]
+
+[ext_resource type="PackedScene" uid="uid://bdgjkm6m803qr" path="res://rooms/base_room.tscn" id="1_r8wpq"]
+[ext_resource type="PackedScene" uid="uid://c0vhvn3l1hihe" path="res://addons/dungeon_builder/nodes/exit_node.tscn" id="2_es4mu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6435"]
+size = Vector2(640, 480)
+
+[node name="Wide" instance=ExtResource("1_r8wpq")]
+editor_description = "Wide
+"
+
+[node name="placement_hull" parent="." index="0"]
+shape = SubResource("RectangleShape2D_v6435")
+debug_color = Color(0.687739, 0.405707, 0.755542, 0.42)
+
+[node name="ExitNode" parent="." index="1" instance=ExtResource("2_es4mu")]
+position = Vector2(-321, 0)
+
+[node name="ExitNode2" parent="." index="2" instance=ExtResource("2_es4mu")]
+position = Vector2(0, -241)

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bdgjkm6m803qr"]
+
+[node name="BaseRoom" type="Area2D"]
+collision_layer = 4096
+collision_mask = 4096
+
+[node name="placement_hull" type="CollisionShape2D" parent="."]

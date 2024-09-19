@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8jga76tduocj"]
+
+[ext_resource type="PackedScene" uid="uid://bdgjkm6m803qr" path="res://rooms/base_room.tscn" id="1_lugon"]
+[ext_resource type="PackedScene" uid="uid://c0vhvn3l1hihe" path="res://addons/dungeon_builder/nodes/exit_node.tscn" id="2_ckxhp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1yup"]
+size = Vector2(64, 64)
+
+[node name="Corner" instance=ExtResource("1_lugon")]
+
+[node name="placement_hull" parent="." index="0"]
+shape = SubResource("RectangleShape2D_m1yup")
+debug_color = Color(0.400351, 0.53572, 0.775659, 0.42)
+
+[node name="ExitNode" parent="." index="1" instance=ExtResource("2_ckxhp")]
+position = Vector2(33, 0)
+
+[node name="ExitNode2" parent="." index="2" instance=ExtResource("2_ckxhp")]
+position = Vector2(0, -33)
