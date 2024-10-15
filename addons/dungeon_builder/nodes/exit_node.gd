@@ -34,7 +34,6 @@ func setup() ->void:
 		texture_rect.size=size
 		texture_rect.position-=size/2
 		atlas.region.size=Vector2(16,16)
-		print("Setup.")
 	
 
 func _process(delta: float) -> void:

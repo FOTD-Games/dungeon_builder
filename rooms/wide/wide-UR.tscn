@@ -1,21 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://ytbhpeji5wuu"]
+[gd_scene load_steps=3 format=3 uid="uid://ytbhpeji5wuu"]
 
 [ext_resource type="PackedScene" uid="uid://bdgjkm6m803qr" path="res://rooms/base_room.tscn" id="1_7hltc"]
 [ext_resource type="PackedScene" uid="uid://c0vhvn3l1hihe" path="res://addons/dungeon_builder/nodes/exit_node.tscn" id="2_ka5wy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6435"]
-size = Vector2(640, 480)
 
 [node name="Wide" instance=ExtResource("1_7hltc")]
 editor_description = "Wide
 "
 
 [node name="placement_hull" parent="." index="0"]
-shape = SubResource("RectangleShape2D_v6435")
-debug_color = Color(0.687739, 0.405707, 0.755542, 0.42)
+polygon = PackedVector2Array(-320, -240, 320, -240, 320, 240, -320, 240)
 
 [node name="ExitNode" parent="." index="1" instance=ExtResource("2_ka5wy")]
-position = Vector2(321, 0)
+position = Vector2(320, 0)
 
 [node name="ExitNode2" parent="." index="2" instance=ExtResource("2_ka5wy")]
-position = Vector2(0, -241)
+position = Vector2(0, -240)

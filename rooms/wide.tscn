@@ -15,4 +15,4 @@ shape = SubResource("RectangleShape2D_v6435")
 debug_color = Color(0.687739, 0.405707, 0.755542, 0.42)
 
 [node name="ExitNode" parent="." index="1" instance=ExtResource("2_hhjri")]
-position = Vector2(0, -243)
+position = Vector2(0, -240)

@@ -14,10 +14,10 @@ debug_color = Color(0.500071, 0.566334, 0.375425, 0.42)
 
 [node name="ExitNode" parent="." index="1" instance=ExtResource("2_qmi1f")]
 editor_description = "Hall"
-position = Vector2(-241, 0)
+position = Vector2(-240, 0)
 
 [node name="ExitNode2" parent="." index="2" instance=ExtResource("2_qmi1f")]
-position = Vector2(241, 0)
+position = Vector2(240, 0)
 
 [node name="ExitNode3" parent="." index="3" instance=ExtResource("2_qmi1f")]
 position = Vector2(0, 33)

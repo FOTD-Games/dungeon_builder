@@ -1,32 +1,15 @@
-[gd_scene load_steps=24 format=3 uid="uid://dnko5uciaaln4"]
+[gd_scene load_steps=6 format=3 uid="uid://tcj4qe7ixbse"]
 
-[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/generator.gd" id="1_ta6us"]
-[ext_resource type="PackedScene" uid="uid://ck0q2cte73j4a" path="res://rooms/wide/wide-D.tscn" id="2_2w5c8"]
-[ext_resource type="PackedScene" uid="uid://bria3nktclo4m" path="res://rooms/wide/wide-DL.tscn" id="3_kgbja"]
-[ext_resource type="PackedScene" uid="uid://b6m0xj4y4ueup" path="res://rooms/wide/wide-L.tscn" id="4_5a3xg"]
-[ext_resource type="PackedScene" uid="uid://bjvyfwptbx50m" path="res://rooms/hall.tscn" id="4_21nu8"]
-[ext_resource type="PackedScene" uid="uid://okn6jol4pqwc" path="res://rooms/wide/wide-LR.tscn" id="5_dmjmy"]
-[ext_resource type="PackedScene" uid="uid://cuuusywt5v5ya" path="res://rooms/tall/Tall-D.tscn" id="5_rq3tu"]
-[ext_resource type="PackedScene" uid="uid://basqjpuvxy8x3" path="res://rooms/tall/Tall-DL.tscn" id="6_5opb7"]
-[ext_resource type="PackedScene" uid="uid://bvmfd8pb8v5k7" path="res://rooms/wide/wide-R.tscn" id="6_hgpjp"]
-[ext_resource type="PackedScene" uid="uid://c6l28v5tbpdxa" path="res://rooms/wide/wide-U.tscn" id="7_3kvph"]
-[ext_resource type="PackedScene" uid="uid://btt2mnchvu0tg" path="res://rooms/tall/Tall-DR.tscn" id="7_thvm2"]
-[ext_resource type="PackedScene" uid="uid://dar1ph8nwd1vv" path="res://rooms/tall/Tall-L.tscn" id="8_exfho"]
-[ext_resource type="PackedScene" uid="uid://b6783pcacrjb5" path="res://rooms/wide/wide-UL.tscn" id="8_f6yua"]
-[ext_resource type="PackedScene" uid="uid://dpkpwighkx75p" path="res://rooms/tall/Tall-LR.tscn" id="9_1ut7v"]
-[ext_resource type="PackedScene" uid="uid://ytbhpeji5wuu" path="res://rooms/wide/wide-UR.tscn" id="9_en3h3"]
-[ext_resource type="PackedScene" uid="uid://dqlb4tpo8pje0" path="res://rooms/tall/Tall-R.tscn" id="10_l1ia5"]
-[ext_resource type="PackedScene" uid="uid://bngi26fp6frh5" path="res://rooms/tall/Tall-U.tscn" id="11_nkudp"]
-[ext_resource type="PackedScene" uid="uid://ckhpmsd4m0vlh" path="res://rooms/tall/Tall-UL.tscn" id="12_nxolu"]
-[ext_resource type="PackedScene" uid="uid://buh08djuqrv0j" path="res://rooms/tall/Tall-DLR.tscn" id="12_u3rlw"]
-[ext_resource type="PackedScene" uid="uid://bth3y2ultrv0x" path="res://rooms/tall/Tall-UR.tscn" id="13_wm2ls"]
-[ext_resource type="PackedScene" uid="uid://c7jiuvsed2uik" path="res://rooms/tall/Tall-DUL.tscn" id="14_smkna"]
-[ext_resource type="PackedScene" uid="uid://dhe6ouu4epj6a" path="res://rooms/tall/Tall-DUR.tscn" id="15_16dvv"]
-[ext_resource type="PackedScene" uid="uid://bregh77jn1hfb" path="res://rooms/tall/Tall-ULR.tscn" id="21_rkw6m"]
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/generator.gd" id="1_hht5d"]
+[ext_resource type="PackedScene" uid="uid://dar1ph8nwd1vv" path="res://rooms/tall/Tall-L.tscn" id="8_nvqgu"]
+[ext_resource type="PackedScene" uid="uid://dqlb4tpo8pje0" path="res://rooms/tall/Tall-R.tscn" id="10_mysg8"]
+[ext_resource type="PackedScene" uid="uid://okn6jol4pqwc" path="res://rooms/wide/wide-LR.tscn" id="18_sf5l8"]
+[ext_resource type="Script" path="res://MapCamera2D.gd" id="23_lmsw6"]
 
 [node name="Generator" type="Node2D"]
-script = ExtResource("1_ta6us")
-available_rooms = Array[PackedScene]([ExtResource("2_2w5c8"), ExtResource("3_kgbja"), ExtResource("4_5a3xg"), ExtResource("5_dmjmy"), ExtResource("6_hgpjp"), ExtResource("7_3kvph"), ExtResource("8_f6yua"), ExtResource("9_en3h3"), ExtResource("5_rq3tu"), ExtResource("6_5opb7"), ExtResource("12_u3rlw"), ExtResource("7_thvm2"), ExtResource("14_smkna"), ExtResource("15_16dvv"), ExtResource("8_exfho"), ExtResource("9_1ut7v"), ExtResource("10_l1ia5"), ExtResource("11_nkudp"), ExtResource("12_nxolu"), ExtResource("21_rkw6m"), ExtResource("13_wm2ls"), ExtResource("4_21nu8")])
+script = ExtResource("1_hht5d")
+available_rooms = Array[PackedScene]([ExtResource("8_nvqgu"), ExtResource("18_sf5l8"), ExtResource("10_mysg8")])
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.25, 0.25)
+[node name="MapCamera2D" type="Camera2D" parent="."]
+script = ExtResource("23_lmsw6")
+pan_margin = 0.0

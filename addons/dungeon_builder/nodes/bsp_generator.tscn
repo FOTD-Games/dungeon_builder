@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ll7hsqe3fn73"]
+
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/bsp_generator.gd" id="1_xrxq2"]
+
+[node name="BspGenerator" type="Node2D"]
+script = ExtResource("1_xrxq2")
+cheat_toggle = null
+
+[node name="Area2D" type="Area2D" parent="."]

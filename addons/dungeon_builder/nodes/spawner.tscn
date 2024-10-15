@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpdeue5v755xv"]
+
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/spawner.gd" id="1_288da"]
+
+[node name="Spawner" type="Area2D"]
+script = ExtResource("1_288da")
+spawn_size = Vector2(32, 32)
