@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvmfd8pb8v5k7"]
+[gd_scene load_steps=7 format=3 uid="uid://bvmfd8pb8v5k7"]
 
 [ext_resource type="PackedScene" uid="uid://bdgjkm6m803qr" path="res://rooms/base_room.tscn" id="1_bg11r"]
 [ext_resource type="PackedScene" uid="uid://c0vhvn3l1hihe" path="res://addons/dungeon_builder/nodes/exit_node.tscn" id="2_dh834"]
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/room_tags.gd" id="3_jlaug"]
+[ext_resource type="Resource" uid="uid://bh6ufqudq6put" path="res://rooms/test_tags/wide_want.tres" id="3_sbws3"]
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/tags/Generation_Tag.gd" id="4_k421h"]
+[ext_resource type="Resource" uid="uid://geeeq77khhmd" path="res://rooms/test_tags/Wide.tres" id="5_n7meu"]
 
 [node name="Wide" instance=ExtResource("1_bg11r")]
 editor_description = "Wide
@@ -12,3 +16,9 @@ polygon = PackedVector2Array(-320, -240, 320, -240, 320, 240, -320, 240)
 
 [node name="ExitNode" parent="." index="1" instance=ExtResource("2_dh834")]
 position = Vector2(320, 0)
+direction = 1
+matching_tag_sets = ExtResource("3_sbws3")
+
+[node name="room_tags" type="Node" parent="." index="2"]
+script = ExtResource("3_jlaug")
+tags = Array[ExtResource("4_k421h")]([ExtResource("5_n7meu")])

@@ -43,7 +43,6 @@ func step_generation()->bool:
 	var rooms:=get_possible_rooms(exit)
 	
 	if rooms.keys().size()==0:
-		print("nope")
 		used_rooms-=1;
 		exit.queue_free()
 		return true
@@ -100,16 +99,11 @@ func test_room(room:Node2D, exit:exit_node) -> Dictionary:
 	for targ_exit in room_exits:
 		room.global_position=exit.global_position-targ_exit.position
 		cast.global_position=room.global_position;
-		cast.force_shapecast_update()
-		
-		get_tree().process_frame
-		
+		cast.force_shapecast_update()		
 		if !check_collision(shape):
-			results[targ_exit]=room.duplicate();
+			results[targ_exit]=room;
 		else:
-			#print("booo")
 			pass
-	#cast.position= Vector2(-50000,-50000)
 	return results;
 
 func check_collision(room:CollisionPolygon2D) ->bool:
@@ -125,7 +119,6 @@ func check_collision(room:CollisionPolygon2D) ->bool:
 				
 				var data1 = Geometry2D.clip_polygons(offset_room, offset_shape)
 				var data2 = Geometry2D.clip_polygons(offset_shape, offset_room)
-				print(data2)
 				if data1.size() == 0 and data2.size() == 0:
 					continue
 				if data2.size() > 0 and data1.size() > 0:
@@ -147,7 +140,7 @@ func check_collision(room:CollisionPolygon2D) ->bool:
 	if cast.position== room.position:
 		return true;
 	return false;
-	
+
 func get_exits(room:Node2D) ->Array[exit_node]:
 	var exits:Array[exit_node]
 	for node in room.get_children():
@@ -157,14 +150,11 @@ func get_exits(room:Node2D) ->Array[exit_node]:
 	return exits;
 	 	
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		step_generation()
+	#if Input.is_action_just_pressed("ui_accept"):
+		#step_generation()
 	if Input.is_action_just_pressed("ui_up"):
 		check_collision(get_child(2).get_node("placement_hull"))
-
-@onready var map_camera_2d: MapCamera2D = $MapCamera2D
-
-	
+#s	
 		
 func do_spawns(target_node:Node2D)->void:
 	for child in get_children():

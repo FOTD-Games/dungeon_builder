@@ -1,6 +1,6 @@
 @tool
 
-extends Node
+extends Area2D
 class_name spawner
 
 var col_area:CollisionShape2D
@@ -44,8 +44,7 @@ func spawn(parent:Node2D):
 	
 	new_scene.position= rand_pos
 	#if new_scene is Entity:
-		#ECS.add_component(new_scene) 
-	# some sort of hookable event here.  A signal. duh.
+		#ECS.add_component(new_scene)
 	
 	parent.add_child(new_scene)
 	

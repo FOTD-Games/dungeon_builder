@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Exit_Node_Want_Tag" load_steps=10 format=3 uid="uid://bh6ufqudq6put"]
+
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/tags/exit_node_want_tag.gd" id="1_xhgob"]
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/tags/Generation_Tag_Set.gd" id="2_w0j3h"]
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/tags/weighted_generation_tag.gd" id="3_ltor4"]
+[ext_resource type="Resource" uid="uid://0xfchspyclwn" path="res://rooms/test_tags/Tall.tres" id="4_sdxth"]
+[ext_resource type="Resource" uid="uid://geeeq77khhmd" path="res://rooms/test_tags/Wide.tres" id="5_lxrvc"]
+
+[sub_resource type="Resource" id="Resource_gle8i"]
+script = ExtResource("3_ltor4")
+tag = ExtResource("5_lxrvc")
+weight = 1
+
+[sub_resource type="Resource" id="Resource_lixm3"]
+script = ExtResource("3_ltor4")
+tag = ExtResource("4_sdxth")
+weight = 2
+
+[sub_resource type="Resource" id="Resource_7wii1"]
+script = ExtResource("3_ltor4")
+tag = ExtResource("4_sdxth")
+weight = 1
+
+[sub_resource type="Resource" id="Resource_jelk7"]
+script = ExtResource("2_w0j3h")
+weight_threshold = 1
+desired_tags = Array[ExtResource("3_ltor4")]([SubResource("Resource_lixm3")])
+required_tags = Array[ExtResource("3_ltor4")]([SubResource("Resource_7wii1")])
+blacklist_tags = Array[ExtResource("3_ltor4")]([SubResource("Resource_gle8i")])
+
+[resource]
+script = ExtResource("1_xhgob")
+tags = Array[ExtResource("2_w0j3h")]([SubResource("Resource_jelk7")])

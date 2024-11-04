@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Generation_Tag" load_steps=2 format=3 uid="uid://ueq3wfv83jpv"]
+
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/tags/Generation_Tag.gd" id="1_dw54s"]
+
+[resource]
+script = ExtResource("1_dw54s")
+name = ""
