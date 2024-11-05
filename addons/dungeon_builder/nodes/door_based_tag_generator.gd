@@ -39,8 +39,6 @@ func _ready() -> void:
 		else:
 			print("Room is not an Area2D")
 
-	generate()
-
 			
 func generate() -> void:
 	var room = available_rooms[0]
@@ -126,12 +124,10 @@ func try_rooms(rooms:Array[Area2D], exit:exit_node) -> Dictionary:
 				to_return[room] = new_offset
 	return to_return
 				
-#Update to provide criteria, so we can split things out by type.
-#Metadata maybe?  Seems the most compatible method to do it.
 
 func copy_nodes(target:Node, from:Area2D, at:Vector2) ->void:
 	for node in from.get_children():
-		if node is spawner or node is exit_node \
+		if node is exit_node \
 		or node is TileMapLayer or node is CollisionPolygon2D:
 			continue;
 			
@@ -142,7 +138,7 @@ func copy_nodes(target:Node, from:Area2D, at:Vector2) ->void:
 
 func copy_decorations_nodes(target:Node, from:Area2D, at:Vector2) ->void:
 	for node in from.get_children():
-		if node is spawner or node is exit_node \
+		if node is exit_node \
 		or node is TileMapLayer or node is CollisionPolygon2D:
 			continue;
 			
@@ -207,86 +203,6 @@ func get_rooms_by_tag(exit:exit_node) -> selected_rooms:
 				rooms.required_rooms.append(room)
 
 	return rooms
-# func get_desired_rooms_weighted(exit:exit_node) -> Array[Area2D]:
-# 	var valid_rooms : Array[Area2D]
-# 	for room in available_rooms:
-# 		var tag_hosts = room.find_children("", "room_tags")
-# 		if tag_hosts.size() == 0:
-# 			continue
-# 		else:
-# 			var tags = tag_hosts[0].tags as Array[Generation_Tag]
-# 			var valid = true
-			
-# 			for tag in exit.blacklist_tags:
-# 				if tags.has(tag):
-# 					valid = false
-# 					break
-# 			for tag in exit.required_tags:
-# 				if not tags.has(tag):
-# 					valid = false
-# 					break
-# 			if (get_exits(room).size() + used_rooms-1 )>= max_rooms:
-# 				valid = false;
-# 				break;
-# 			for tag in exit.desired_tags:
-# 				if tags.has(tag):
-# 					valid = true
-# 					valid_rooms.push_back(room)
-# 					break
-# 			if valid:
-# 				valid_rooms.append(room)
-# 	return valid_rooms
-
-# func get_desired_rooms(exit:exit_node) -> Array[Area2D]:
-# 	var valid_rooms : Array[Area2D]
-# 	for room in available_rooms:
-# 		var tag_hosts = room.find_children("", "room_tags")
-# 		if tag_hosts.size() == 0:
-# 			continue
-# 		else:
-# 			var tags = tag_hosts[0].tags as Array[Generation_Tag]
-# 			var valid = true
-# 			for tag in exit.required_tags:
-# 				if not tags.has(tag):
-# 					valid = false
-# 					break
-# 			for tag in exit.desired_tags:
-# 				if not tags.has(tag):
-# 					valid = false
-# 					break
-# 			for tag in exit.blacklist_tags:
-# 				if tags.has(tag):
-# 					valid = false
-# 					break
-# 			if (get_exits(room).size() + used_rooms-1 )>= max_rooms:
-# 				valid = false;
-# 			if valid:
-# 				valid_rooms.append(room)
-# 	return valid_rooms
-
-#less restrictive than get_desired_rooms.
-func get_required_rooms(exit:exit_node) -> Array[Area2D]:
-	var valid_rooms:Array[Area2D]
-	for room in available_rooms:
-		var tag_hosts = room.find_children("", "room_tags")
-		if tag_hosts.size() == 0:
-			continue
-		else:
-			var tags = tag_hosts[0].tags as Array[Generation_Tag]
-			var valid = true
-			for tag in exit.required_tags:
-				if not tags.has(tag):
-					valid = false
-					break
-			for tag in exit.blacklist_tags:
-				if tags.has(tag):
-					valid = false
-					break
-			if (get_exits(room).size() + used_rooms-1 )>= max_rooms:
-				valid = false;
-			if valid:
-				valid_rooms.append(room)
-	return valid_rooms				
 
 func hits_others(shape:Shape2D, xform:Transform2D, exclude=[Node2D]):
 	for child in get_children():
@@ -321,8 +237,3 @@ func get_shapes(col_area:CollisionObject2D) -> Array[Shape2D]:
 		for x in col_area.shape_owner_get_shape_count(i) as int:
 			shapes.push_back(col_area.shape_owner_get_shape(i,x))
 	return shapes;
-
-
-func _unhandled_key_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		step_generation()

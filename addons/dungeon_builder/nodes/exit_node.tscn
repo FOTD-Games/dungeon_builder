@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0vhvn3l1hihe"]
+[gd_scene load_steps=3 format=3 uid="uid://c0vhvn3l1hihe"]
 
 [ext_resource type="Script" path="res://addons/dungeon_builder/nodes/exit_node.gd" id="1_oawq4"]
+[ext_resource type="Texture2D" uid="uid://b6fuei53novyf" path="res://addons/dungeon_builder/nodes/exit_atlas.tres" id="2_v5jqm"]
 
 [node name="ExitNode" type="Area2D"]
 script = ExtResource("1_oawq4")
+
+[node name="@CollisionShape2D@34814" type="CollisionShape2D" parent="."]
+
+[node name="@TextureRect@34815" type="TextureRect" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("2_v5jqm")

@@ -1,0 +1,39 @@
+[gd_scene load_steps=26 format=3 uid="uid://od4vhc2dg6jh"]
+
+[ext_resource type="Script" path="res://example/example_scene.gd" id="1_mi7ko"]
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/door_based_tag_generator.gd" id="1_otxn8"]
+[ext_resource type="PackedScene" uid="uid://cuuusywt5v5ya" path="res://example/rooms/tall/Tall-D.tscn" id="2_av7l3"]
+[ext_resource type="PackedScene" uid="uid://basqjpuvxy8x3" path="res://example/rooms/tall/Tall-DL.tscn" id="3_wdtbk"]
+[ext_resource type="PackedScene" uid="uid://buh08djuqrv0j" path="res://example/rooms/tall/Tall-DLR.tscn" id="4_afnkm"]
+[ext_resource type="PackedScene" uid="uid://btt2mnchvu0tg" path="res://example/rooms/tall/Tall-DR.tscn" id="5_2qi81"]
+[ext_resource type="PackedScene" uid="uid://c7jiuvsed2uik" path="res://example/rooms/tall/Tall-DUL.tscn" id="6_bhhgt"]
+[ext_resource type="PackedScene" uid="uid://dhe6ouu4epj6a" path="res://example/rooms/tall/Tall-DUR.tscn" id="7_xt4tv"]
+[ext_resource type="PackedScene" uid="uid://dar1ph8nwd1vv" path="res://example/rooms/tall/Tall-L.tscn" id="8_xiwvs"]
+[ext_resource type="PackedScene" uid="uid://dpkpwighkx75p" path="res://example/rooms/tall/Tall-LR.tscn" id="9_3kvq5"]
+[ext_resource type="PackedScene" uid="uid://dqlb4tpo8pje0" path="res://example/rooms/tall/Tall-R.tscn" id="10_dcn3d"]
+[ext_resource type="PackedScene" uid="uid://bngi26fp6frh5" path="res://example/rooms/tall/Tall-U.tscn" id="11_3ojbq"]
+[ext_resource type="PackedScene" uid="uid://ckhpmsd4m0vlh" path="res://example/rooms/tall/Tall-UL.tscn" id="12_7kr42"]
+[ext_resource type="PackedScene" uid="uid://bregh77jn1hfb" path="res://example/rooms/tall/Tall-ULR.tscn" id="13_c8g5q"]
+[ext_resource type="PackedScene" uid="uid://bth3y2ultrv0x" path="res://example/rooms/tall/Tall-UR.tscn" id="14_adadm"]
+[ext_resource type="PackedScene" uid="uid://ck0q2cte73j4a" path="res://example/rooms/wide/wide-D.tscn" id="15_ay4iu"]
+[ext_resource type="PackedScene" uid="uid://bria3nktclo4m" path="res://example/rooms/wide/wide-DL.tscn" id="16_d172x"]
+[ext_resource type="PackedScene" uid="uid://b6m0xj4y4ueup" path="res://example/rooms/wide/wide-L.tscn" id="17_pfkl7"]
+[ext_resource type="PackedScene" uid="uid://okn6jol4pqwc" path="res://example/rooms/wide/wide-LR.tscn" id="18_k723b"]
+[ext_resource type="PackedScene" uid="uid://bvmfd8pb8v5k7" path="res://example/rooms/wide/wide-R.tscn" id="19_j71lh"]
+[ext_resource type="PackedScene" uid="uid://c6l28v5tbpdxa" path="res://example/rooms/wide/wide-U.tscn" id="20_u8gtu"]
+[ext_resource type="PackedScene" uid="uid://b6783pcacrjb5" path="res://example/rooms/wide/wide-UL.tscn" id="21_j7rqg"]
+[ext_resource type="PackedScene" uid="uid://ytbhpeji5wuu" path="res://example/rooms/wide/wide-UR.tscn" id="22_sgi15"]
+[ext_resource type="PackedScene" uid="uid://brgy0ppgo41ay" path="res://example/rooms/wide/wide-URL.tscn" id="23_5n3lj"]
+[ext_resource type="Script" path="res://example/MapCamera2D.gd" id="25_mgb2m"]
+
+[node name="ExampleScene" type="Node2D"]
+script = ExtResource("1_mi7ko")
+
+[node name="door_based_tag_generator" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_otxn8")
+source_rooms = Array[PackedScene]([ExtResource("2_av7l3"), ExtResource("3_wdtbk"), ExtResource("4_afnkm"), ExtResource("5_2qi81"), ExtResource("6_bhhgt"), ExtResource("7_xt4tv"), ExtResource("8_xiwvs"), ExtResource("9_3kvq5"), ExtResource("10_dcn3d"), ExtResource("11_3ojbq"), ExtResource("12_7kr42"), ExtResource("13_c8g5q"), ExtResource("14_adadm"), ExtResource("15_ay4iu"), ExtResource("16_d172x"), ExtResource("17_pfkl7"), ExtResource("18_k723b"), ExtResource("19_j71lh"), ExtResource("20_u8gtu"), ExtResource("21_j7rqg"), ExtResource("22_sgi15"), ExtResource("23_5n3lj")])
+
+[node name="MapCamera2D" type="Camera2D" parent="."]
+script = ExtResource("25_mgb2m")
+pan_margin = 0.0

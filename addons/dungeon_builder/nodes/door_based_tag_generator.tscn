@@ -1,34 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://fcb6vvj2veeq"]
+[gd_scene load_steps=2 format=3 uid="uid://fcb6vvj2veeq"]
 
 [ext_resource type="Script" path="res://addons/dungeon_builder/nodes/door_based_tag_generator.gd" id="1_jwbp7"]
-[ext_resource type="PackedScene" uid="uid://cuuusywt5v5ya" path="res://rooms/tall/Tall-D.tscn" id="2_locpb"]
-[ext_resource type="PackedScene" uid="uid://basqjpuvxy8x3" path="res://rooms/tall/Tall-DL.tscn" id="3_o25hh"]
-[ext_resource type="PackedScene" uid="uid://buh08djuqrv0j" path="res://rooms/tall/Tall-DLR.tscn" id="4_qlgt3"]
-[ext_resource type="PackedScene" uid="uid://btt2mnchvu0tg" path="res://rooms/tall/Tall-DR.tscn" id="5_h7sqy"]
-[ext_resource type="PackedScene" uid="uid://c7jiuvsed2uik" path="res://rooms/tall/Tall-DUL.tscn" id="6_1mftm"]
-[ext_resource type="PackedScene" uid="uid://dhe6ouu4epj6a" path="res://rooms/tall/Tall-DUR.tscn" id="7_mnups"]
-[ext_resource type="PackedScene" uid="uid://dar1ph8nwd1vv" path="res://rooms/tall/Tall-L.tscn" id="8_qlhrt"]
-[ext_resource type="PackedScene" uid="uid://dpkpwighkx75p" path="res://rooms/tall/Tall-LR.tscn" id="9_u6xjt"]
-[ext_resource type="PackedScene" uid="uid://dqlb4tpo8pje0" path="res://rooms/tall/Tall-R.tscn" id="10_ueylv"]
-[ext_resource type="PackedScene" uid="uid://bngi26fp6frh5" path="res://rooms/tall/Tall-U.tscn" id="11_u3k58"]
-[ext_resource type="PackedScene" uid="uid://ckhpmsd4m0vlh" path="res://rooms/tall/Tall-UL.tscn" id="12_swcvn"]
-[ext_resource type="PackedScene" uid="uid://bregh77jn1hfb" path="res://rooms/tall/Tall-ULR.tscn" id="13_ui6by"]
-[ext_resource type="PackedScene" uid="uid://bth3y2ultrv0x" path="res://rooms/tall/Tall-UR.tscn" id="14_r144o"]
-[ext_resource type="PackedScene" uid="uid://ck0q2cte73j4a" path="res://rooms/wide/wide-D.tscn" id="15_kgk3r"]
-[ext_resource type="PackedScene" uid="uid://bria3nktclo4m" path="res://rooms/wide/wide-DL.tscn" id="16_88ud0"]
-[ext_resource type="PackedScene" uid="uid://b6m0xj4y4ueup" path="res://rooms/wide/wide-L.tscn" id="17_b2sow"]
-[ext_resource type="PackedScene" uid="uid://okn6jol4pqwc" path="res://rooms/wide/wide-LR.tscn" id="18_2wxth"]
-[ext_resource type="PackedScene" uid="uid://bvmfd8pb8v5k7" path="res://rooms/wide/wide-R.tscn" id="19_t7knl"]
-[ext_resource type="PackedScene" uid="uid://c6l28v5tbpdxa" path="res://rooms/wide/wide-U.tscn" id="20_ps7jg"]
-[ext_resource type="PackedScene" uid="uid://b6783pcacrjb5" path="res://rooms/wide/wide-UL.tscn" id="21_iy8bb"]
-[ext_resource type="PackedScene" uid="uid://ytbhpeji5wuu" path="res://rooms/wide/wide-UR.tscn" id="22_onkhu"]
-[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/map_camera_2d.gd" id="23_eryro"]
-[ext_resource type="PackedScene" uid="uid://brgy0ppgo41ay" path="res://rooms/wide/wide-URL.tscn" id="23_q6vlu"]
 
 [node name="Door_Based_Tag_Generator" type="Node2D"]
 script = ExtResource("1_jwbp7")
-source_rooms = Array[PackedScene]([ExtResource("2_locpb"), ExtResource("3_o25hh"), ExtResource("4_qlgt3"), ExtResource("5_h7sqy"), ExtResource("6_1mftm"), ExtResource("7_mnups"), ExtResource("8_qlhrt"), ExtResource("9_u6xjt"), ExtResource("10_ueylv"), ExtResource("11_u3k58"), ExtResource("12_swcvn"), ExtResource("13_ui6by"), ExtResource("14_r144o"), ExtResource("15_kgk3r"), ExtResource("16_88ud0"), ExtResource("17_b2sow"), ExtResource("18_2wxth"), ExtResource("19_t7knl"), ExtResource("20_ps7jg"), ExtResource("21_iy8bb"), ExtResource("22_onkhu"), ExtResource("23_q6vlu")])
-
-[node name="MapCamera2D" type="Camera2D" parent="."]
-script = ExtResource("23_eryro")
-pan_margin = 0.0

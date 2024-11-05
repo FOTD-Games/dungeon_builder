@@ -1,0 +1,22 @@
+[gd_scene load_steps=7 format=3 uid="uid://bngi26fp6frh5"]
+
+[ext_resource type="PackedScene" uid="uid://bdgjkm6m803qr" path="res://example/rooms/base_room.tscn" id="1_gryal"]
+[ext_resource type="PackedScene" uid="uid://c0vhvn3l1hihe" path="res://addons/dungeon_builder/nodes/exit_node.tscn" id="2_i1cso"]
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/room_tags.gd" id="3_8w1gu"]
+[ext_resource type="Resource" uid="uid://ddspskjtsmsxo" path="res://example/rooms/test_tags/tall_want.tres" id="3_yeuiu"]
+[ext_resource type="Script" path="res://addons/dungeon_builder/nodes/tags/Generation_Tag.gd" id="4_71m28"]
+[ext_resource type="Resource" uid="uid://0xfchspyclwn" path="res://example/rooms/test_tags/Tall.tres" id="5_5shfq"]
+
+[node name="BaseRoom" instance=ExtResource("1_gryal")]
+
+[node name="placement_hull" parent="." index="0"]
+polygon = PackedVector2Array(-240, -320, 240, -320, 240, 320, -240, 320)
+
+[node name="ExitNode" parent="." index="1" instance=ExtResource("2_i1cso")]
+position = Vector2(0, -320)
+direction = 2
+matching_tag_sets = ExtResource("3_yeuiu")
+
+[node name="room_tags" type="Node" parent="." index="2"]
+script = ExtResource("3_8w1gu")
+tags = Array[ExtResource("4_71m28")]([ExtResource("5_5shfq")])
