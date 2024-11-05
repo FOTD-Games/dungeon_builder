@@ -1,16 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0vhvn3l1hihe"]
+[gd_scene load_steps=6 format=3 uid="uid://c0vhvn3l1hihe"]
 
 [ext_resource type="Script" path="res://addons/dungeon_builder/nodes/exit_node.gd" id="1_oawq4"]
-[ext_resource type="Texture2D" uid="uid://b6fuei53novyf" path="res://addons/dungeon_builder/nodes/exit_atlas.tres" id="2_v5jqm"]
+[ext_resource type="Texture2D" uid="uid://bkp13jf4c76cj" path="res://addons/dungeon_builder/nodes/exit.png" id="2_pvfcm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggbbh"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4l65k"]
+atlas = ExtResource("2_pvfcm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfylf"]
+atlas = ExtResource("2_pvfcm")
+region = Rect2(32, 0, 16, 16)
 
 [node name="ExitNode" type="Area2D"]
 script = ExtResource("1_oawq4")
+metadata/_edit_group_ = true
 
-[node name="@CollisionShape2D@34814" type="CollisionShape2D" parent="."]
+[node name="@CollisionShape2D@67055" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ggbbh")
 
-[node name="@TextureRect@34815" type="TextureRect" parent="."]
+[node name="@TextureRect@67056" type="TextureRect" parent="."]
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
-texture = ExtResource("2_v5jqm")
+texture = SubResource("AtlasTexture_4l65k")
+
+[node name="@TextureRect@67057" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 160)
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+pivot_offset = Vector2(16, 16)
+texture = SubResource("AtlasTexture_rfylf")
