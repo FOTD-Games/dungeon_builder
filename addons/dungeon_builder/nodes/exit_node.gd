@@ -36,7 +36,7 @@ var atlas := preload("res://addons/dungeon_builder/nodes/exit_atlas.tres") as At
 @export
 var matching_tag_sets:Exit_Node_Want_Tag
 
-func _ready() -> void:
+func _init() -> void:
 	setup()
 	
 func setup() ->void:
@@ -46,11 +46,17 @@ func setup() ->void:
 		arrow_texture=TextureRect.new()
 		
 		add_child(col_area)
-		#col_area.owner= get_tree().edited_scene_root
 		add_child(texture_rect)
-		#texture_rect.owner= get_tree().edited_scene_root
 		add_child(arrow_texture)
+		
+		#col_area.owner= get_tree().edited_scene_root
+		#texture_rect.owner= get_tree().edited_scene_root
 		#arrow_texture.owner=get_tree().edited_scene_root
+		
+		col_area.shape=RectangleShape2D.new()
+		col_area.shape.set_size(size)
+		col_area.visible=false
+		
 		dirty=true		
 
 func get_direction() ->Vector2:
@@ -66,9 +72,7 @@ func _process(delta: float) -> void:
 				remove_child(child)
 			setup()
 			
-		col_area.shape=RectangleShape2D.new()
-		col_area.shape.set_size(size)
-		#col_area.visible=true
+		
 
 		arrow_texture.texture=atlas.duplicate()
 		arrow_texture.size=size

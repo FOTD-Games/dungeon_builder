@@ -13,6 +13,3 @@ var desired_tags:Array[Weighted_Generation_Tag]
 var required_tags:Array[Weighted_Generation_Tag]
 @export
 var blacklist_tags:Array[Weighted_Generation_Tag]
-
-
-

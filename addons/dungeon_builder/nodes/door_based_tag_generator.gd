@@ -20,12 +20,10 @@ var done = false;
 var open_exits:Array[exit_node]
 
 var last_room:=Area2D
-
 @export
 var show_cam:Camera2D;
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for scene in source_rooms:
 		var room = scene.instantiate()
@@ -51,35 +49,40 @@ func generate() -> void:
 			open_exits.push_back(child)
 			child.set_meta("parent", room)
 			used_rooms+=1;
+	await get_tree().create_timer(.5).timeout
 
-func step_generation() -> bool:
-	var required := false;
-	if open_exits.size() == 0:
+func step_generation() -> bool:	
+	if open_exits.size() == 0: 
 		return true;
 	
 	var exit = open_exits.pick_random() as exit_node
 	open_exits.erase(exit)
-
+		
 	var valid_rooms = get_rooms_by_tag(exit)
 
 	if valid_rooms.desired_rooms.size() == 0 and valid_rooms.required_rooms.size() == 0:
-		print("No valid rooms for exit")
+		print("No desired rooms for exit")
 		exit.queue_free()
-		return true;
+		return false;
 	
 
-	var more_valid_rooms := try_rooms(valid_rooms.desired_rooms, exit)
+	var more_valid_rooms := await try_rooms(valid_rooms.desired_rooms, exit)
 	
 	if more_valid_rooms.size() == 0:
-		more_valid_rooms = try_rooms(valid_rooms.required_rooms, exit)
-
+		more_valid_rooms = await try_rooms(valid_rooms.required_rooms, exit)
+	else:
+		print("Desired Rooms lost: " + str(valid_rooms.desired_rooms.size()-more_valid_rooms.size()))
+		print("Desired rooms remaining: "  + str(more_valid_rooms.keys().size()))
 	if more_valid_rooms.size() == 0:
-		print("No valid rooms fit exit")
+		print("No required rooms fit exit")
 		exit.queue_free()
-		return true;
+		return false;
+	else:
+		print("Required Rooms lost: " + str(valid_rooms.required_rooms.size()-more_valid_rooms.size()))
+		print("Required rooms remaining: "  + str(more_valid_rooms.keys().size()))
 
 	var targ_room = more_valid_rooms.keys().pick_random() as Area2D
-	var room = targ_room.duplicate();
+	var room = targ_room.duplicate(DUPLICATE_USE_INSTANTIATION)
 	room.global_position=more_valid_rooms[targ_room]
 	add_child(room)
 	last_room=room
@@ -88,9 +91,11 @@ func step_generation() -> bool:
 	exit.connected=true;
 	for child in room.get_children():
 		if child is exit_node:
-			if child.global_position == exit.global_position:
+			if child.global_position == exit.global_position: 
 				child.connected=true;
 				continue;
+			else:
+				print (child.global_position - exit.global_position)
 			open_exits.push_back(child)
 			child.set_meta("parent", targ_room)
 	return false;
@@ -102,24 +107,23 @@ func try_rooms(rooms:Array[Area2D], exit:exit_node) -> Dictionary:
 		var exits = get_opposing_exits(room, exit)
 		if exits.size() == 0:
 			continue
-		if exits[0].direction == exit.directions.UP:
-			pass
 		var room_shape = room_shapes[room]
-
+		
 		for targ_exit in exits:
 			var exit_shapes = room_shapes[exit.get_meta("parent")]
 			var exit_offset = exit.position
-			var new_offset = exit.global_position-targ_exit.position
+			var new_offset = exit.global_position - targ_exit.position
 
 			var valid= true;
 
 			for shape in room_shape:
 				var new_xform=Transform2D(0, new_offset)				
-				if hits_others(shape,new_xform):
+				if await exits_hit_others(room,Transform2D(0,exit.global_position),exit.get_parent(),[]):
+					valid=false;
+					break
+				if await hits_others(shape,new_xform):
 					valid=false
 					break;
-			if exits_hit_others(room, [targ_exit]):
-				valid=false
 			if valid:
 				to_return[room] = new_offset
 	return to_return
@@ -151,9 +155,13 @@ func copy_decorations_nodes(target:Node, from:Area2D, at:Vector2) ->void:
 
 func get_opposing_exits(node:Node2D, dir:exit_node)	-> Array[exit_node]:
 	var ret:Array[exit_node]
-	for child in node.get_children():
-		if child is exit_node and child.compare_direction(dir):
-			ret.append(child)
+	var nodes = get_exits(node)
+	for child in nodes:
+		if child.compare_direction(dir):
+			ret.push_back(child)
+				#for child in node.get_children():
+		#if child is exit_node and child.compare_direction(dir):
+			#ret.append(child)
 			
 	return ret;
 
@@ -176,6 +184,8 @@ func get_rooms_by_tag(exit:exit_node) -> selected_rooms:
 		var tag_hosts = room.find_children("", "room_tags")
 		if tag_hosts.size() == 0:
 			continue
+		if exit.matching_tag_sets == null:
+			print(exit.get_meta("parent").name)
 		for tset:Generation_Tag_Set in exit.matching_tag_sets.tags:
 			var weight = 0
 			var tags = tag_hosts[0].tags as Array[Generation_Tag]
@@ -195,8 +205,6 @@ func get_rooms_by_tag(exit:exit_node) -> selected_rooms:
 			for tag in tset.desired_tags:
 				if tags.has(tag.tag):
 					weight+=tag.weight
-			
-			
 			if valid:
 				for i in range(weight - tset.weight_threshold):
 					rooms.desired_rooms.append(room)
@@ -212,25 +220,40 @@ func hits_others(shape:Shape2D, xform:Transform2D, exclude=[Node2D]):
 			var area = child as Area2D;
 			for i in child.get_shape_owners():
 				for x in range(child.shape_owner_get_shape_count(i)):
-					var contacts = shape.collide_and_get_contacts(xform, child.shape_owner_get_shape(i,x),child.global_transform)
+					var child_shape = child.shape_owner_get_shape(i,x) as Shape2D;
+					var contacts = shape.collide_and_get_contacts(xform, child.shape_owner_get_shape(i,x),Transform2D(0, child.global_transform.origin))
 					if !contacts.is_empty():
+						
+						var rect1 := ColorRect.new()
+						rect1.size=child.shape_owner_get_shape(i,x).get_rect().size
+						rect1.position=child.global_transform.origin-child_shape.get_rect().size
+						rect1.color=Color.BLUE
+						
+						
+						var rect2 := ColorRect.new()
+						rect2.size=shape.get_rect().size
+						rect2.position=xform.origin
+						rect2.color=Color.RED
+						
+						#add_child(rect1)
+						#add_child(rect2)
+						
+						await get_tree().physics_frame
+						
 						return true;
 	return false;
-
-func exits_hit_others(room_to_test:Area2D, exits_to_exclude:Array[exit_node]):
-	for child in get_children():
-		if child is Area2D:
-			for child_2 in child.get_children():
-				if child_2 is exit_node:
-					if exits_to_exclude.has(child_2):
-						continue;
-					
-					var exit_shapes = get_shapes(child_2);
-					
-					for shape:Shape2D in exit_shapes:
-						if hits_others(shape, child.global_transform, [room_to_test, child]):
-							return true;
+	
+func exits_hit_others(room_to_test:Area2D,xform:Transform2D, room_to_ignore:Area2D, exits_to_exclude:Array[exit_node]) :
+	var exits = get_exits(room_to_test);
+	for exit in exits:
+		if exit.connected:
+			continue
+		if exits_to_exclude.has(exit):
+			continue;
+		if await hits_others(exit.get_child(0).shape, Transform2D(0,xform.origin-exit.global_position), [room_to_ignore, room_to_test]):
+			return true;
 	return false;
+			
 func get_shapes(col_area:CollisionObject2D) -> Array[Shape2D]:
 	var shapes:Array[Shape2D]
 	for i in col_area.get_shape_owners():

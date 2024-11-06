@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://basqjpuvxy8x3"]
+[gd_scene load_steps=7 format=3 uid="uid://basqjpuvxy8x3"]
 
 [ext_resource type="PackedScene" uid="uid://bdgjkm6m803qr" path="res://example/rooms/base_room.tscn" id="1_3q1q5"]
 [ext_resource type="PackedScene" uid="uid://c0vhvn3l1hihe" path="res://addons/dungeon_builder/nodes/exit_node.tscn" id="2_xur8w"]
+[ext_resource type="Resource" uid="uid://ddspskjtsmsxo" path="res://example/rooms/test_tags/tall_want.tres" id="3_jw0qo"]
 [ext_resource type="Script" path="res://addons/dungeon_builder/nodes/room_tags.gd" id="3_yfsg1"]
 [ext_resource type="Script" path="res://addons/dungeon_builder/nodes/tags/Generation_Tag.gd" id="4_avsdo"]
 [ext_resource type="Resource" uid="uid://0xfchspyclwn" path="res://example/rooms/test_tags/Tall.tres" id="5_c76yh"]
@@ -15,10 +16,12 @@ polygon = PackedVector2Array(-240, -320, 240, -320, 240, 320, -240, 320)
 position = Vector2(0, 320)
 direction = 3
 door = true
+matching_tag_sets = ExtResource("3_jw0qo")
 
 [node name="ExitNode2" parent="." index="2" instance=ExtResource("2_xur8w")]
 position = Vector2(-240, 0)
 door = true
+matching_tag_sets = ExtResource("3_jw0qo")
 
 [node name="room_tags" type="Node" parent="." index="3"]
 script = ExtResource("3_yfsg1")
