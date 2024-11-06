@@ -48,11 +48,7 @@ func setup() ->void:
 		add_child(col_area)
 		add_child(texture_rect)
 		add_child(arrow_texture)
-		
-		#col_area.owner= get_tree().edited_scene_root
-		#texture_rect.owner= get_tree().edited_scene_root
-		#arrow_texture.owner=get_tree().edited_scene_root
-		
+				
 		col_area.shape=RectangleShape2D.new()
 		col_area.shape.set_size(size)
 		col_area.visible=false
@@ -72,8 +68,6 @@ func _process(delta: float) -> void:
 				remove_child(child)
 			setup()
 			
-		
-
 		arrow_texture.texture=atlas.duplicate()
 		arrow_texture.size=size
 		arrow_texture.position=-size/2
